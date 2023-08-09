@@ -1,0 +1,684 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Quán cafe</title>
+    <link rel="icon" type="image/x-icon" href="./images/32/logo32.ico">
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700&family=Raleway:wght@400;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <script
+      type="module"
+      src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"
+    ></script>
+    <script
+      nomodule
+      src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"
+    ></script>
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/locomotive-scroll@3.5.4/dist/locomotive-scroll.css"
+    />
+    <link rel="stylesheet" href="./css/app.css" />
+    <style>
+      .thumb-art {
+        display: flex;
+      }
+  
+      .thumb-art img {
+        width: 200px;
+        height: auto;
+        margin-right: 20px;
+      }
+  
+      .title-news {
+        text-align: right;
+      }
+  
+      .description {
+        text-align: right;
+      }
+      a {
+      text-decoration: none;
+    }
+    .lammau{
+      background: #eeb86e;
+    }
+
+    #search-box {
+    position: relative;
+    display: inline-block;
+}
+
+#search-box {
+    position: relative;
+    display: inline-block;
+}
+
+.search-wrapper {
+    position: absolute;
+    top: 5vh;
+    right: 0;
+    display: flex;
+    align-items: center;
+    transition: all 0.25s ease-in-out;
+    width: 0;
+    overflow: hidden;
+    background: #fff;
+    border-radius: 30px;
+}
+
+#search-box.show-search .search-wrapper {
+    width: 300px; /* Để khung tìm kiếm có chiều rộng 300px khi hiển thị */
+    padding: 12px;
+    /* height: 30px; */
+}
+
+/* #search-box.show-search .icon-search {
+    margin-left: 10px;
+} */
+
+#search-box #search-text {
+    border: none;
+    outline: none;
+    background: none;
+    font-size: 18px;
+    width: 100%; /* Để input chiếm đầy đủ chiều rộng của search-wrapper */
+    padding: -2.9px 15px;
+    height: 30px;
+    transition: all 0.25s ease-in-out;
+}
+#search-box.show-search #search-text {
+    /* padding: 10px 15px; */
+}
+
+#search-box #search-btn {
+    background-color: #fff;
+    cursor: pointer;
+    border: none;
+    /* padding: 5px; */
+    border-radius: 50%;
+    font-size: 18px;
+}
+
+.icon-search {
+    cursor: pointer;
+}
+
+/* Ẩn dấu mũi tên của input type="number" trên các trình duyệt */
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+    </style>
+  </head>
+  <body data-scroll-container>
+    <div id="progress" style="display: grid; background: conic-gradient(rgb(3, 204, 101) 36%, rgb(215, 215, 215) 36%);">
+      <span id="progress-value">🠕</span>
+    </div>
+    <script src="./JS/scrollup.js"></script>
+    <div class="wrapper">
+      <header class="header" onsubmit="return login(event)">
+        <div class="container">
+          <div class="header-main" id="header">
+            <img src="./images/logocf.png" width="154px" height="120px" class="header-logo" />
+            <div class="menu">
+              <ul class="menu-list">
+                <li class="menu-item">
+                  <a href="index.html" class="menu-link">Home</a>
+                </li>
+                <li class="menu-item">
+                  <a href="#about" class="menu-link">Về chúng tôi</a>
+                </li>
+                <li class="menu-item">
+                  <a href="#work" class="menu-link">Dịch vụ</a>
+                </li>
+                <li class="menu-item">
+                  <a href="#experience" class="menu-link">Mua hàng</a>
+                </li>
+                <li class="menu-item">
+                  <a href="#contact" class="menu-link">Tin tức</a>
+                </li>
+                <li class="menu-item">
+                  <a href="./login.html"class="menu-link"target="index">Đăng nhập / Đăng kí</a>
+                </li>
+              </ul>
+            </div>
+            <div id="search-box">
+                <img src="./images/icon-search.png" alt="" class="icon-search" onclick="toggleSearchBox()">
+                <div class="search-wrapper">
+                    <input type="text" id="search-text" placeholder="Bạn muốn tìm gì" required>
+                    <button id="search-btn">
+                        <i class="fas fa-solid fa-magnifying-glass"></i>
+                    </button>
+                </div>
+            </div>
+            
+            
+            <script>
+var searchBox = document.getElementById("search-box");
+
+function toggleSearchBox() {
+    searchBox.classList.toggle("show-search");
+}
+
+
+            </script>
+            
+            <!-- <img src="./images/icon-search.png" alt="" class="icon-search" /> -->
+            <!-- <img src="./images/icon-menu.png" alt="" class="menu-toggle" />         -->
+            <img src="./images/icon-menu.png" alt="" class="menu-toggle" onclick="toggleMenu()">
+        </div>   
+        <script src="./JS/login.js"></script>
+        <script>
+   
+
+          // Check if the user is logged in on page load and display the username
+          document.addEventListener("DOMContentLoaded", function () {
+            var loggedInUser = getLoggedInUser();
+            if (loggedInUser) {
+              showLoggedInUser(loggedInUser);
+            }
+          });
+        </script>
+      </div>
+    </header>
+      <main>
+        <section class="hero">
+          <div class="container">
+            <div class="hero-content">
+              <h1 class="hero-heading">Coffe</h1>
+              <h3 class="hero-caption">Khoảnh khắc hương cà phê đong đầy yêu thương.</h3>
+              <div class="hero-video">
+                <img src="./images/icon-play.png" alt="" />
+                <span>Play Video - 2:52</span>
+              </div>
+            </div>
+          </div>
+        </section>
+        <section class="feature">
+          <div class="slider">
+            <div class="list">
+                <div class="item">
+                    <img src="./images/1111.jpg" alt="">
+                </div>
+                <div class="item">
+                    <img src="./images/2222.jpg" alt="">
+                </div>
+                <div class="item">
+                    <img src="https://domingocoffee.com.vn/wp-content/uploads/2021/10/setup-quan-cafe-1.jpg" alt="">
+                </div>
+                <div class="item">
+                    <img src="./images/4444.jpg" alt="">
+                </div>
+                <div class="item">
+                    <img src="./images/5.jpg" alt="">
+                </div>
+            </div>
+            <div class="buttons">
+                <button id="prev"><</button>
+                <button id="next">></button>
+            </div>
+            <ul class="dots">
+                <li class="active"></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+            </ul>
+        </div>
+          <div class="container">
+            <div class="feature-main">
+              <div class="feature-item">
+                <div class="feature-icon">
+                  <img src="./images/img-lightbulb.png" alt="" />
+                </div>
+                <h3 class="feature-title">Ý tưởng sáng tạo</h3>
+                <div class="feature-desc text">
+                  Phong cách thiết kế quán cafe chuẩn nghệ thuật.
+                </div>
+              </div>
+              <div class="feature-item">
+                <div class="feature-icon">
+                  <img src="./images/img-coffee.png" alt="" />
+                </div>
+                <h3 class="feature-title">Pha chế cafe ngon.</h3>
+                <div class="feature-desc text">
+                  Luôn tận tâm, hỏi khách hàng để cải thiện sản phẩm.
+                </div>
+              </div>
+              <div class="feature-item">
+                <div class="feature-icon">
+                  <img src="./images/img-trophy.png" alt="" />
+                </div>
+                <h3 class="feature-title">Phục vụ khách hàng</h3>
+                <div class="feature-desc text">
+                  Luôn cho khách hàng có cảm giác khi ngồi thoải mái, mát mẻ.
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+        <section class="about" id="about">
+          <div class="container">
+            <div class="about-main">
+              <div class="about-content">
+                <h3 class="caption">Về chúng tôi</h3>
+                <h2 class="heading">
+                  Coffee
+                </h2>
+                <div class="text">
+                  Chúng tôi là một quán cà phê chuyên về cung cấp những ly cà phê thơm ngon và đậm đà nhất. 
+                  Với đội ngũ nhân viên tận tâm và đam mê, chúng tôi cam kết mang đến cho khách hàng những
+                   trải nghiệm cà phê tuyệt vời nhất.
+                </div>
+              </div>
+              <div class="about-image">
+                <img
+                  src="./images/image-phone-under.png"
+                  alt="" 
+                  class="about-phone-under"
+                />
+                <img src="./images/img-phone.jpg" width="450px" class="about-phone" />
+              </div>
+            </div>
+          </div>
+        </section>
+        <section class="work" id="work">
+          <div class="container">
+            <div class="work-header">
+              <h3 class="caption">Dịch vụ</h3>
+              <h2 class="heading">Đồ uống | Đồ ăn |Thực phẩm</h2>
+              <div class="text">
+                CUNG CẤP CÀ PHÊ | MỞ QUÁN NHƯỢNG QUYỀN | ĐÀO TẠO QUẢN LÝ
+              </div>
+            </div>
+            <div class="work-list">
+              <div class="work-item">
+                <img src="./images/bao-bi-cafe-500g-9618.jpg"/>
+              </div>
+              <div class="work-item">
+                <div class="lammau">
+                <h1>CUNG CẤP CÀ PHÊ</h1>
+                <h2> -Cà phê rang xay <br>
+                  - Cà phê hoà tan  <br>
+                  - Cà phê chồn <br>
+                  - Cà phê nhân <br>
+                  và những sản phẩm khác</h2></div>
+                <!-- <img src="./images/img3.jpg" alt="" /> -->
+              </div>
+              <div class="work-item">                
+                <img src="https://vuicoffee.com/wp-content/uploads/2019/11/nhuong-quyen-cafe-2.png" alt="" />
+              </div>
+              <div class="work-item">
+                <div class="lammau">
+                <h1>MỞ QUÁN NHƯỢNG QUYỀN</h1>
+                <h2>-Phối cảnh tổng thể <br>
+                  -Trang trí theo thiết kế <br>
+                  -Trang trí theo yêu cầu <br>
+                  -Xây dựng trọn gói từ A-Z <br>
+                  và các hạn mục khác</h2></div>
+                <!-- <img src="./images/img6.jpg" alt="" /> -->
+              </div>
+              <div class="work-item">
+                <img src="./images/dich-vu-dao-tao-quan-ly-vuicoffee.jpg"/>
+              </div>
+              <div class="work-item">
+                <div class="lammau">
+                <h1>ĐÀO TẠO QUẢN LÝ</h1>
+                <h2> -Quản lý tổng quan <br>
+                  - Quản lý nhân sự  <br>
+                  - Quản lý dịch vụ <br>
+                  - Quản lý chất lượng <br>
+                  và nhiều kinh nghiệm thực tế</h2></div>
+                <!-- <img src="./images/img3.jpg" alt="" /> -->
+              </div>
+              <div class="work-item">                
+                <img src="./images/dich-vu-dao-tao-pha-phe-vuicoffee.jpg" alt="" />
+              </div>
+              <div class="work-item">
+                <div class="lammau">
+                <h1>ĐÀO TẠO PHA CHẾ</h1>
+                <h2>-Kiến thức về cà phê <br>
+                  -Pha chế cà phê truyền thống<br>
+                  -Pha chế cà phê hiện đại <br>
+                 -Pha chế các món thức uống khác <br>
+                  và các mẹo pha chế</h2></div>
+                <!-- <img src="./images/img6.jpg" alt="" /> -->
+              </div>
+            </div>
+            <a href="#" class="btn btn--primary work-link">All works</a>
+          </div>
+        </section>
+        <section class="experience" id="experience">
+          <div class="container">
+            <div class="experience-main">
+              <h1>Mua hàng</h1>
+              <div class="list1">
+                
+                <div class="item">
+                    <img src="image/1.PNG">
+                    <div class="title">Món tráng miệng - 1</div>
+                    <div class="price">120.000</div>
+                    <button onclick="addToCard(0)"><a href="./html.html">Mua ngay</a></button></div><div class="item">
+                    <img src="image/2.PNG">
+                    <div class="title">Cafe muối - 2</div>
+                    <div class="price">35.000</div>
+                    <button onclick="addToCard(1)"><a href="./html.html">Mua ngay</a></button></div><div class="item">
+                    <img src="image/3.PNG">
+                    <div class="title">Cafe sữa - 3</div>
+                    <div class="price">35.000</div>
+                    <button onclick="addToCard(2)"><a href="./html.html">Mua ngay</a></button></div><div class="item">
+                    <img src="image/4.PNG">
+                    <div class="title">Cafe đá - 4</div>
+                    <div class="price">32.000</div>
+                    <button onclick="addToCard(3)"><a href="./html.html">Mua ngay</a></button></div><div class="item">
+                    <img src="image/5.PNG">
+                    <div class="title">Bánh mì thịt ngon</div>
+                    <div class="price">32.000</div>
+                    <button onclick="addToCard(4)"><a href="./html.html">Mua ngay</a></button></div><div class="item">
+                    <img src="https://product.hstatic.net/1000075078/product/1655348107_mochi-choco_f6e63c0efa704e11990791f9fdd88214_large.jpg">
+                    <div class="title">Bánh mochi hộp</div>
+                    <div class="price">120.000</div>
+                    <button onclick="addToCard(5)">Thêm vào giỏ hàng</button></div></div>
+              <!-- <div class="experience-number">
+                <span class="experience-year">20</span>
+                <img src="./images/img7.png" alt="" class="experience-mask" />
+                <img
+                  src="./images/img-dots-big.png"
+                  alt=""
+                  class="experience-dots"
+                />
+              </div> -->
+              <!-- <div class="experience-content">
+                <h3 class="caption">Cuộc hành trình của Cà phê sạch</h3>
+                <h2 class="heading">Năm chế biến hương vị tuyệt vời</h2>
+                <div class="text">
+                  Trong suốt hơn 20 năm, những người chuyên pha chế cà phê đã tận tâm nghiên cứu 
+                  và hoàn thiện quá trình làm cà phê sạch. Họ chọn lựa cẩn thận nguồn nguyên liệu,
+                   du lịch qua nhiều vùng trồng cà phê để học hỏi và đảm bảo chất lượng. Công đoạn 
+                   rang xay cà phê cũng là bí quyết thành công, với việc rang tỉ mỉ và tận dụng nguồn
+                    năng lượng bền vững. Sứ mệnh của họ là tôn vinh cà phê sạch, không chứa hóa chất độc
+                     hại và luôn giữ độ tươi ngon trong mỗi tách cà phê. Những người này cũng là những nhà
+                      sáng tạo, luôn thử nghiệm để tạo ra những dòng sản phẩm độc đáo và ngon miệng.
+                </div>
+              </div> -->
+              <a href="./html.html">Mua hàng</a>
+            </div>
+          </div>
+        </section>        
+        <section class="partner" id="blog">
+          <div class="container">
+            <div class="partner-header">
+              <h3 class="caption">
+                CỘNG SỰ</h3>
+            </div>
+            <div class="partner-list">
+              <div class="partner-item">
+                <img src="./images/logo1.png" alt="" />
+              </div>
+              <div class="partner-item">
+                <img src="./images/logo2.png" alt="" />
+              </div>
+              <div class="partner-item">
+                <img src="./images/logo3.png" alt="" />
+              </div>
+              <div class="partner-item">
+                <img src="./images/logo4.png" alt="" />
+              </div>
+              <div class="partner-item">
+                <img src="./images/logo5.png" alt="" />
+              </div>
+              <div class="partner-item">
+                <img src="./images/logo6.png" alt="" />
+              </div>
+              <div class="partner-item">
+                <img src="./images/logo7.png" alt="" />
+              </div>
+              <div class="partner-item">
+                <img src="./images/logo8.png" alt="" />
+              </div>
+            </div>
+          </div>
+        </section>
+        <section class="review">
+          <div class="container">
+            <div class="review-header">
+              <h3 class="caption">Trải nghiệm</h3>
+              <h2 class="heading">Xem đánh giá của khách hàng của chúng tôi</h2>
+              <div class="text">
+                Phasellus pulvinar iaculis nunc at placerat. Sed porta
+                sollicitudin eros, vel sagittis.
+              </div>
+            </div>
+            <div class="review-list">
+              <div class="review-item">
+                <img src="./images/img-quote.png" alt="" class="review-icon" />
+                <div class="review-desc">
+                  Tôi đã có cơ hội ghé thăm tiệm cafe của bạn và thực sự cảm thấy <strong>ấn tượng</strong>. Trải nghiệm tại đây thực sự đáng nhớ và độc đáo.
+
+                </div>
+                <img src="./images/img5.webp" alt="" class="review-avatar" />
+                <h3 class="review-author">Gordon Ramsay</h3>
+              </div>
+            </div>
+          </div>
+        </section>
+        <!-- <section class="contact" id="contact">
+          <div class="container">
+            <div class="contact-main">
+              <img src="./images/img10.png" alt="" class="contact-liquid" />
+              <img src="./images/img11.png" alt="" class="contact-person" />
+              <div class="contact-content">
+                <h2 class="heading heading--big">Let's Get Started</h2>
+                <div class="text text--big contact-desc">
+                  Start using our easy-to-use tools with multiple options to
+                  improve.
+                </div>
+                <a href="#" class="btn btn--primary">Let's start now</a>
+              </div>
+            </div>
+          </div>
+        </section> -->
+        <section class="contact" id="contact">
+          <div class="bodyc">
+          <div class="container">
+            <div class="contact-main">
+              <h2 class="heading heading--big">Tin tức</h2>
+              <div class="box box1">  
+                <div class="content">  
+              <!-- <div class="box-conatiner"> 
+              <div class="thumb-art"> -->
+                <a href="https://vnexpress.net/gia-ca-phe-tang-ky-luc-4616906.html"><img src=https://i1-kinhdoanh.vnecdn.net/2023/06/13/ca-phe-jpeg-2155-1686650680.jpg?w=500&h=300&q=100&dpr=1&fit=crop&s=iaNrIyrxeIQXLwTr9RIjWw alt="Thumbnail Art"></a>
+                <h1>Giá cà phê tăng kỷ lục</h1>
+                <p>Giá cà phê leo thang nhiều tháng qua, hiện loại nhân xô tăng hơn 70% so với đầu năm và tăng 50% so với cùng kỳ năm ngoái.</p>
+              </div>
+            </div>
+            <div class="box box2">  
+              <div class="content">  
+              <!-- <div class="thumb-art"> <a href="https://vnexpress.net/ca-phe-co-thuc-su-la-than-duoc-chong-buon-ngu-4616551.html"></a> -->
+                <img src=https://i1-suckhoe.vnecdn.net/2023/06/12/ca-phe-2-1857-1683009122-16865-2102-6984-1686557331.jpg?w=500&h=300&q=100&dpr=1&fit=crop&s=Hi8da8DEr2DMk2EH43Nk4Q alt="Thumbnail Art">
+                <h1>Cà phê có thực sự là thần dược chống buồn ngủ?</h1>
+                <p >Cà phê chứa caffein giúp sảng khoái, tỉnh táo nhưng dùng lâu dài hoặc quá nhiều sẽ kìm hãm thụ thể gây buồn ngủ adnosine, khiến cơ thể bị thiếu ngủ kinh niên.</p>
+              </div>
+            </div>
+            <div class="box box3">  
+              <div class="content">  
+
+                <img src="https://i1-suckhoe.vnecdn.net/2022/08/23/coffee-lyk-1661239780-1705-1661239853.jpg?w=500&h=300&q=100&dpr=1&fit=crop&s=aNExGM1zlowpfZBUH1YGOw" alt="Thumbnail Art">
+                <h1>Giá cà phê tăng kỷ lục</h1>
+                <p class="description">Giá cà phê leo thang nhiều tháng qua, hiện loại nhân xô tăng hơn 70% so với đầu năm và tăng 50% so với cùng kỳ năm ngoái.</p>
+              </div>
+              </div>
+            <hr>
+            
+              <div class="thumb-art">
+                <img src=https://lepathcoffee.com/wp-content/uploads/2022/01/moi-ngay-uong-1-ly-ca-phe-co-tot-khong-768x1152.jpg alt="Thumbnail Art">
+              </div>
+              <h1 class="title-news">Mỗi ngày uống 1 ly cafe có tốt không?</h1>
+              <p class="description">Cà phê chứa caffein giúp sảng khoái, tỉnh táo nhưng dùng lâu dài hoặc quá nhiều sẽ kìm hãm thụ thể gây buồn ngủ adnosine, khiến cơ thể bị thiếu ngủ kinh niên.</p>
+              <hr>
+              <iframe width="560" height="315" src="https://www.youtube.com/embed/wMnIshcQajE" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+            </div>
+                </div>
+              </div>
+          
+        </section></main></div>
+      </main>
+      <footer class="footer">
+        <div class="footer-top">
+          <div class="container">
+            <div class="footer-main">
+              <div class="footer-column">
+                <a href="index.html" class="footer-logo"
+                  ><img src="./images/logocf.png" width="154px" 
+                /></a>
+                <div class="footer-desc text">
+                  Sống lâu những người đạm và tinh khiết mềm mại. Mauris tempus tortor vel mi eleifend laoreet. Không có người đoạt giải khôn ngoan.
+                </div>
+                <div class="social">
+                  <a href="#" class="social-item">
+                    <ion-icon name="logo-facebook"></ion-icon>
+                  </a>
+                  <a href="#" class="social-item">
+                    <ion-icon name="logo-twitter"></ion-icon>
+                  </a>
+                  <a href="#" class="social-item">
+                    <ion-icon name="logo-instagram"></ion-icon>
+                  </a>
+                  <a href="#" class="social-item">
+                    <ion-icon name="logo-dribbble"></ion-icon>
+                  </a>
+                  <div class="fb-page" data-href="https://www.facebook.com/profile.php?id=100093676303560&amp;ref=embed_page" 
+                  data-tabs="timeline" data-width="200" data-height="" data-small-header="false" data-adapt-container-width="true"
+                   data-hide-cover="false" data-show-facepile="true"><blockquote cite="https://www.facebook.com/profile.php?id=100093676303560&amp;ref=embed_page"
+                    class="fb-xfbml-parse-ignore"><a href="https://www.facebook.com/profile.php?id=100093676303560&amp;ref=embed_page">The Nhom Coffe</a></blockquote></div>
+                </div>
+              </div>
+              <div class="footer-column">
+                <h3 class="footer-heading second-font">Liên kết hữu ích</h3>
+                <ul class="footer-links">
+                  <li class="footer-item">
+                    <a href="#" class="footer-link">Về chúng tôi</a>
+                  </li>
+                  <li class="footer-item">
+                    <a href="#" class="footer-link">
+                      Liên hệ chúng tôi</a>
+                  </li>
+                  <li class="footer-item">
+                    <a href="#" class="footer-link">Điều khoản dịch vụ</a>
+                  </li>
+                  <li class="footer-item">
+                    <a href="#" class="footer-link">
+                      Kế hoạch & Giá cả</a>
+                  </li>
+                  <li class="footer-item">
+                    <a href="#" class="footer-link">Sơ đồ trang web</a>
+                  </li>
+                </ul>
+              </div>
+              <div class="footer-column">
+                <h3 class="footer-heading second-font">Liên hệ chúng tôi</h3>
+                <ul class="footer-info">
+                  <li>Phone Number 1: ( + 84 ) 876 57 36 73</li>
+                  <li>
+                    Phone Number 2:
+                    <span class="footer-highlight">( + 84 ) 932 87 82 45</span>
+                  </li>
+                </ul>
+                <ul class="footer-info">
+                  <li>
+                    <a href="mailto:support@ocatavian.io"
+                    >Email: nhomcoffe@gmail.com</a
+                    >
+                  </li>
+                  <li>Fax: nhomcoffe@gmail.com</li>
+                </ul>
+                <ul class="footer-info">
+                  <li> <span class="footer-highlight">
+                    Tầng 3-4 Hub Building
+                    195/10E Điện Biên Phủ, P.15,
+                    Q.Bình Thạnh, TP.Hồ Chí Minh
+                  </span></li>
+                  <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d9320.930710434066!2d106.60119818633285!3d10.81371402775382!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31752b48a1f7096d%3A0x174268ef1b3735dc!2sHAM%20QUAN%20CAFE!5e0!3m2!1sen!2s!4v1687148669021!5m2!1sen!2s" 
+                  width="350" height="150" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="footer-bottom">
+          <div class="container footer-container">
+            <a href="#" class="footer-rocket">
+              <ion-icon name="rocket"></ion-icon>
+            </a>
+            <p>
+              Copyright © 2022 Octavian, Designed by
+              <a href="#">Quy</a> All Rights Reserved.
+            </p>
+          </div>
+        </div>
+      </footer>
+    </div>
+    <div class="zalo-chat-widget" data-oaid="579745863508352884" data-welcome-message="Rất vui khi được hỗ trợ bạn!" data-autopopup="0" data-width="300" data-height="300"> </div> 
+    
+    <script src="https://sp.zalo.me/plugins/sdk.js"> </script> 
+  </body>
+  <div id="fb-root"></div>
+  <script async defer crossorigin="anonymous" src="https://connect.facebook.net/vi_VN/sdk.js#xfbml=1&version=v17.0" nonce="3tM8otDJ"></script>
+  <script src="https://cdn.jsdelivr.net/npm/locomotive-scroll@3.5.4/dist/locomotive-scroll.min.js"></script>
+  <script src="./scripts/app.js"></script>
+
+
+
+
+
+  <script>let slider = document.querySelector('.slider .list');
+    let items = document.querySelectorAll('.slider .list .item');
+    let next = document.getElementById('next');
+    let prev = document.getElementById('prev');
+    let dots = document.querySelectorAll('.slider .dots li');
+    
+    let lengthItems = items.length - 1;
+    let active = 0;
+    next.onclick = function(){
+        active = active + 1 <= lengthItems ? active + 1 : 0;
+        reloadSlider();
+    }
+    prev.onclick = function(){
+        active = active - 1 >= 0 ? active - 1 : lengthItems;
+        reloadSlider();
+    }
+    let refreshInterval = setInterval(()=> {next.click()}, 3000);
+    function reloadSlider(){
+        slider.style.left = -items[active].offsetLeft + 'px';
+        // 
+        let last_active_dot = document.querySelector('.slider .dots li.active');
+        last_active_dot.classList.remove('active');
+        dots[active].classList.add('active');
+    
+        clearInterval(refreshInterval);
+        refreshInterval = setInterval(()=> {next.click()}, 3000);
+    
+        
+    }
+    
+    dots.forEach((li, key) => {
+        li.addEventListener('click', ()=>{
+             active = key;
+             reloadSlider();
+        })
+    })
+    window.onresize = function(event) {
+        reloadSlider();
+    };</script>
+
+  </html>
+  

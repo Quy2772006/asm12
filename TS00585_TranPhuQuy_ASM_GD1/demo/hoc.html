@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <title>Document</title>
+</head>
+<body>
+    <style> 
+    *{
+        box-sizing: border-box;
+    }
+    body{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background:#45aaf2;
+        min-height: 100vh;
+    }
+    #search-box{
+        background: #fff;
+        border-radius: 30px;
+    }
+    #search-box #search-text{
+        border: none;
+        outline: none;
+        background: none;
+        font-size: 18px;
+        width: 0;
+        padding: 0;
+        transition: all 0.25s ease-in-out;
+    }
+    #search-box:hover #search-text, #search-box #search-text:valid{
+        width: 300px;
+        padding: 10px 0px 10px 15px;
+    }
+    #search-box #search-btn{
+        background-color: #fff;
+        cursor: pointer;
+        border: none;
+        padding: 15px;
+        border-radius: 50%;
+        font-size: 18px;
+    }
+    </style>
+    <form action="" id="search-box">
+        <input type="text" id="search-text" placeholder="Bạn muốn tìm gì" required>
+        <button id="search-btn"><i class="fa-solid fa-magnifying-glass"></i></button>
+    </form>
+
+</body>
+</html>

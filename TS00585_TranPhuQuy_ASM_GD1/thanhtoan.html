@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="./css/style.css">
+</head>
+<style>
+    .listCard{
+        width: 300px;
+    }
+</style>
+<body>
+    <!-- Thêm class "list" cho phần tử chứa danh sách sản phẩm -->
+<div class="list"></div>
+
+<!-- Thêm class "returnCart" cho phần tử chứa giao diện giỏ hàng -->
+<div class="returnCart">
+  <ul class="listCard"></ul>
+  <div class="totalQuantity"></div>
+  <div class="totalPrice"></div>
+</div>
+
+    <a href="./html.html">Tiếp tục mua hàng</a>
+    <h1>Thanh toán sản phẩm</h1>
+    <div class="card">
+        <h1>Giỏ hàng</h1>
+        <ul class="listCard">
+            <div class="item">
+                <img src="./image/1.PNG">
+                <div class="info">
+                    <div class="name">MÓN TRÁNG MIỆNG</div>
+                    <div class="price">32000</div>
+                </div>
+                <div class="quantity">5</div>
+                <div class="returnPrice">$433.3</div>
+            </div>
+        </ul> </div>
+    <section>
+        <div class="form-box">
+          <div class="form-value">
+            <div class="form">
+                <div class="group">
+                    <label for="name">Email</label>
+                    <input type="text" name="name" id="name">
+                </div>
+    
+                <div class="group">
+                    <label for="phone">Phone Number</label>
+                    <input type="text" name="phone" id="phone">
+                </div>
+    
+                <div class="group">
+                    <label for="address">Địa chỉ</label>
+                    <input type="text" name="address" id="address">
+                </div>
+    
+                <div class="group">
+                    <label for="country">Loại giao hàng</label>
+                    <select name="country" id="country">
+                        <option value="">Lựa chọn..</option>
+                        <option value="">Giao hàng bình thường</option>
+                        <option value="">Giao hàng nhanh</option>
+                        <option value="">Giao hàng siêu nhanh</option>
+                    </select>
+                </div>
+    
+                <div class="group">
+                    <label for="city">Thành phố</label>
+                    <select name="city" id="city">
+                        <option value="">Choose..</option>
+                        <option value="">TPHCM</option>
+                        <option value="">Hà Nội</option>
+                        <option value="">Đà Nẵng</option>
+                        <option value="">Nha Trang</option>
+                        <option value="">Vũng Tàu</option>
+                    </select>
+                </div>
+            </div>
+            <div class="return">
+                <div class="row">
+                    <div>Số lượng</div>
+                    <div class="totalQuantity">0</div>
+                </div>
+                <div class="row">
+                    <div>Tổng số tiền</div>
+                    <div class="totalPrice">0</div>
+                </div>
+            </div>
+            <button class="buttonCheckout">Thanh toán ngay</button>
+            </div>
+    </div>
+</div>
+      </section>
+      <ul class="listCard">
+        <!-- Các sản phẩm trong giỏ hàng sẽ được thêm vào đây bằng JavaScript -->
+      </ul>
+      
+<script>
+    
+let listCart = [];
+function checkCart(){
+        var cookieValue = document.cookie
+        .split('; ')
+        .find(row => row.startsWith('listCart='));
+        if(cookieValue){
+            listCart = JSON.parse(cookieValue.split('=')[1]);
+        }
+}
+checkCart();
+addCartToHTML();
+function addCartToHTML() {
+  // clear data default
+  let listCartHTML = document.querySelector('.returnCart .list');
+  if (listCartHTML) {
+    // Xóa các phần tử con hiện tại của listCartHTML trước khi cập nhật giao diện
+    while (listCartHTML.firstChild) {
+      listCartHTML.removeChild(listCartHTML.firstChild);
+    }
+
+    let totalQuantityHTML = document.querySelector('.totalQuantity');
+    let totalPriceHTML = document.querySelector('.totalPrice');
+    let totalQuantity = 0;
+    let totalPrice = 0;
+
+    // if has product in Cart
+    if (listCart) {
+      listCart.forEach(product => {
+        if (product) {
+          let newCart = document.createElement('div');
+          newCart.classList.add('item');
+          newCart.innerHTML = 
+              `<img src="${product.image}">
+              <div class="info">
+                  <div class="name">${product.name}</div>
+                  <div class="price">$${product.price}/1 product</div>
+              </div>
+              <div class="quantity">${product.quantity}</div>
+              <div class="returnPrice">$${product.price * product.quantity}</div>`;
+          listCartHTML.appendChild(newCart);
+          totalQuantity = totalQuantity + product.quantity;
+          totalPrice = totalPrice + (product.price * product.quantity);
+        }
+      })
+    }
+
+    totalQuantityHTML.innerText = totalQuantity;
+    totalPriceHTML.innerText = '$' + totalPrice;
+  }
+}
+
+  </script>
+</body>
+</html>
